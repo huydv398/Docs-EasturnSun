@@ -1,3 +1,3 @@
 # Document 
 
-[Reset password root ESXi](Tutorial\Reset-password-ESXi.md)
+[Reset password root ESXi](Tutorial/Reset-password-ESXi.md)
