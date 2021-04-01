@@ -79,7 +79,7 @@ Mục tiêu là sửa file shadow trong ESXi, bằng cách lấy file mã hóa c
 
 ![](/image/Screenshot_14.png)
 
-* Mở file `/etc/shadow` để copy chuỗi mà hóa mật khẩu đã lấy lúc đầu
+* Mở file `/etc/shadow` để copy chuỗi mã hóa mật khẩu đã lấy lúc đầu
 
 ![](/image/Screenshot_15.png)
 
