@@ -7,7 +7,6 @@ Input:
 Output:
 
 
-```
 |MemTotal: 997956 kB
 AnonPages: 67488 kB
 CmaFree: 0 kB
@@ -54,7 +53,7 @@ HardwareCorrupted: 0 kB
 Writeback: 0 kB
 AnonHugePages: 8192 kB
 CmaTotal: 0 kB|
-```
+
 
 
 
