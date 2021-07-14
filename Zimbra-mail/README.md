@@ -212,6 +212,7 @@ Configuration complete - press return to exit
 
 ```
 Kiểm tra cuối cùng
+
 Một bước cuối cùng sẽ là kiểm tra xem các dịch vụ Zimbra có đang chạy hay không 
 ```
 cd ..
