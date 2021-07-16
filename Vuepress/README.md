@@ -63,44 +63,70 @@ yarn add -D vuepress vuepress-theme-meteorlxy
 ```
 mkdir docs && echo '# Hello VuePress' > docs/README.md
 ```
-* Thêm script sau vào file package.json:
+* Thêm script sau vào file package.json, tên của thư mục chứa các dữ liệu gốc:
 ```
 {
   "scripts": {
-    "vuepress:dev": "vuepress dev src",
-    "vuepress:build": "vuepress build src --dest dist"
+    "vuepress:dev": "vuepress dev <src>",
+    "vuepress:build": "vuepress build <src> --dest dist"
   }
 }
 ```
+Ví dụ mình đang đặt tất cả dữ liệu tại thư mục **docs** thì thực hiện tệp `package.json` như sau:
+```
+{
+  "name": "vuepress-docs2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "vuepress:dev": "vuepress dev docs",
+    "vuepress:build": "vuepress build docs --dest dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  }
+}
+
+```
+
 Chạy lệnh sau:
 ```
 yarn vuepress:dev
 ```
 
-Tạo thư mục /vuepress/docs tệp cấu hình. cấu trúc như sau:
+Tạo thư mục /vuepress/docs tệp cấu hình. Cấu trúc như sau:
 ```
 vuepress
 ├── docs
 │   ├── README.md
 │   └── .vuepress
 │       └── config.js
-│   └── web1
-│       └── content1.md
-│       └── content2.md
-│       └── content3.md
-│       └── content4.md
-│       └── README.md
-│   └── web2
-│       └── README.md
-│   └── web3
-│       └── README.md
+│       └── dir1
+│           └── content1.md
+│           └── content2.md
+│           └── content3.md
+│           └── content4.md
+│           └── contact.md
+│           └── support.md
+│           └── README.md
 └── node_modules
 └── package.json
 └── yarn.lock
 ```
 
 Cấu hình file config.js
+
+```cd ~/vuepress/docs
+mkdir .vuepress
+vi config.js
 ```
+Thêm các thành phần cấu hình sau vào:
+```
+
 module.exports = {
     title: 'Logo-Tiêu đề Web',// tiêu đề
     path: '/',// Tại đây nó gọi ra file README.md tại thư mục docs
@@ -112,7 +138,7 @@ module.exports = {
 
         //Tạo nav
         nav: [
-            { text: 'Napthe247', link: 'https://napthe247.me', target: '_blank' }
+            { text: 'Link', link: 'onedata.vn', target: '_blank' }
         ],
         sidebarDepth: 0, //default: 1, trích dẫn đến h2, =0 vô hiệu hóa liên kết tiêu đề ở sidebar
         //displayAllHeaders: true,
@@ -122,20 +148,20 @@ module.exports = {
                 title: 'side1', //Phần này sẽ được hiện thị ở sidebar
                 collapsable: false, //buộc bên trong luôn trích dẫn 
                 children: [
-                    '/web1/content1', // sẽ gọi ra file content1.md ở thư mục web, tương tự với các content bên dưới
-                    '/web1/content2',
-                    '/web1/content3',
-                    '/web1/content4',
+                    '/dir/content1', // sẽ gọi ra file content1.md ở thư mục web, tương tự với các content bên dưới
+                    '/dir/content2',
+                    '/dir/content3',
+                    '/dir/content4',
                 ],
             },
             {
                 //initialOpenGroupIndex: -1,  //Xác định index của nhóm con được mở ban đầu
                 title: 'Liên hệ',
-                path: '/contact/',            
+                path: '/dir/contact',            
             },
             {
                 title: 'Hỗ trợ',
-                path: '/sp/'
+                path: '/dir/support'
             }
         ]
     }
@@ -161,7 +187,7 @@ PermissionsStartOnly=True
 User=root
 Group=root
 WorkingDirectory=/root/docsnapthe247/
-ExecStart=/usr/bin/yarn run dev
+ExecStart=/usr/bin/yarn run vuepress:dev
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
