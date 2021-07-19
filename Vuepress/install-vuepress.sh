@@ -1,22 +1,31 @@
 #!/bin/bash 
 
-#yum update -y
-# yum groupinstall "Development Tools" -y
-# yum install python3-devel -y
-# yum install python3 -y
-# yum install python3-pip -y
-# pip3 install virtualenv
-# yum install -y git curl
+
+cat /etc/os-release* |grep 'ubuntu' > /dev/null 2>&1 && OS='Ubuntu'
+cat /etc/os-release* |grep 'centos' > /dev/null 2>&1 && OS='CentOS' 
+echo $OS
+
+if [ "$OS"="CentOS" ]
+then
+install_vuepress 
+fi
+
+install_vuepress(){
+yum update -y
+yum groupinstall "Development Tools" -y
+yum install python3-devel -y
+yum install python3 -y
+yum install python3-pip -y
+pip3 install virtualenv
+yum install -y git curl
 curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install nodejs -y
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
 sudo yum install yarn -y
-
 cd ~
 mkdir vuepress-demo
 cd vuepress-demo
-
 npm init --yes # or #yarn init --yes
 npm install vuepress@1.8.2 --save-dev #or #yarn add -D vuepress vuepress-theme-meteorlxy
 yarn add -D vuepress
@@ -29,7 +38,7 @@ cp ~/vuepress-demo/package.json ~/vuepress-demo/package.json.bak
 # Chỉnh sửa file cấu hình
 
 awk 'NR==8{print "   , \n    \"vuepress:dev\": \"vuepress dev docs\",\n    \"vuepress:build\": \"vuepress build docs --dest dist\""}1' ~/vuepress-demo/package.json.bak > ~/vuepress-demo/package.json
-npm run vuepress:dev
+# npm run vuepress:dev
 cd ~/vuepress-demo/docs
 mkdir .vuepress && cd .vuepress
 echo "
@@ -77,11 +86,13 @@ module.exports = {
 
 " > config.js
 
-git folder
+cd ~ && cd vuepress && mkdir dir1 && cd dir1
+git clone https://github.com/huydv398/Note-Vuepress
+cd Note-Vuepress/ && mv dir/ ~/vuepress-demo/docs/
 
 cd ~/vuepress-demo
-virtualenv env -p python3.6
-source env/bin/activate
+
+
 echo "
 [Unit]
 Description= env vuepress
@@ -91,15 +102,19 @@ After=network.target
 PermissionsStartOnly=True
 User=root
 Group=root
-WorkingDirectory=/root/docsnapthe247/
+WorkingDirectory=/root/vuepress-demo/
 ExecStart=/usr/bin/yarn run vuepress:dev
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 " > /etc/systemd/system/vuepress.service
 
-
+virtualenv env -p python3.6
+source env/bin/activate
 systemctl daemon-reload
 systemctl start vuepress
 systemctl enable vuepress
 systemctl status vuepress
+
+Echo "Hoàn tất cài đặt Vuepress trên môi trường Linux" && sleep5
+}

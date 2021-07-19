@@ -45,8 +45,8 @@ Kiểm tra cài đặt yarn version:
 Tạo một project có tên là **vuepress**:
 
 ```
-mkdir vuepress
-cd vuepress
+mkdir vuepress-demo
+cd vuepress-demo
 yarn init
 ```
 
@@ -171,6 +171,14 @@ module.exports = {
 
 Khi thực hiện lệnh `yarn vuepress:dev` thì nodejs sẽ chạy nền Foreground trong Linux, tức nghĩa nó sẽ chiếm cửa sổ dòng lệnh. Đến khi hoàn thành. Vậy khi bạn thoát khỏi phiên thì nó sẽ không sử dụng web.
 
+Cài đặt môi trường:
+```
+yum groupinstall "Development Tools" -y
+yum install python3-devel -y
+yum install python3 -y
+yum install python3-pip -y
+pip3 install virtualenv
+```
 
 Thực hiện lệnh sau để chạy như một dịch vụ:
 
