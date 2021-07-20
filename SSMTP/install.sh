@@ -17,7 +17,7 @@ else
     echo none
 fi
 
-cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp-$(date).conf.bak
+cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.bak
 
 read -p "SMTP server:(Enter for: smtp.gmail.com): " smtpserver
 read -p "SMTP Username (Ex: user@gmail.com): " smtpuser
