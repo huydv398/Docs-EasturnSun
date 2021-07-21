@@ -177,6 +177,8 @@ Store configuration
 
 Select, or 'r' for previous menu [r] 4
 
+Password for admin@songhong.com.vn (min 6 characters): [o41v9ntZb9] Duonghuy@@98
+
 ```
 
 Tiếp theo ấn r để quay lại Menu
@@ -217,7 +219,7 @@ Một bước cuối cùng sẽ là kiểm tra xem các dịch vụ Zimbra có �
 ```
 cd ..
 sudo su - zimbra
-zmcontrol starus
+zmcontrol status
 ```
 ```
 [root@mail ~]# cd ..
@@ -252,8 +254,10 @@ Các dịch vụ của Zimbra đã hoạt động.
 ```
 https: // <mail.domain.com.vn>:7071 / hoặc https: // <ip-address>:7071
 ```
+firewall-cmd --zone=public --add-port=7071/tcp --permanent
+firewall-cmd --reload
 
-
+<!-- ![](../image/Screenshot_25.png)
 ![](../image/Screenshot_25.png)
 ![](../image/Screenshot_25.png)
 ![](../image/Screenshot_25.png)
@@ -265,5 +269,4 @@ https: // <mail.domain.com.vn>:7071 / hoặc https: // <ip-address>:7071
 ![](../image/Screenshot_25.png)
 ![](../image/Screenshot_25.png)
 ![](../image/Screenshot_25.png)
-![](../image/Screenshot_25.png)
-![](../image/Screenshot_25.png)
+![](../image/Screenshot_25.png) -->

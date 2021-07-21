@@ -46,3 +46,5 @@ FromLineOverride=YES
 echo " 
 root:$smtpuser:smtp.gmail.com:587
 " >> /etc/ssmtp/revaliases
+sleep 5
+echo "Install thành công SSMTP."
