@@ -44,20 +44,16 @@ vi /etc/hosts
 ```
 <ip-address> mail.domain.com.vn mail
 ```
+hoặc thực hiện lệnh:
+```
+
+hostnamectl set-hostname songhong.com.vn
+echo "
+103.139.103.218 songhong.com.vn mail
+" >>/etc/hosts 
+```
 
 ## Cài đặt
-* Trước khi kiểm tra có dịch vụ đang chạy.
-
-```
-netstat -tunlp
-```
-* Stop các dịch vụ postfix.
-
-```
-sudo systemctl stop postfix
-sudo systemctl disable postfix 
-sudo yum remove postfix
-```
 * Update.
 ```
 yum install epel-release -y
@@ -66,12 +62,10 @@ yum update -y
 
 * Thiết lập Firewall và một số package cơ bản, tắt selinux và khởi động lại:
 ```
-sudo systemctl disable firewalld
 sudo systemctl stop firewalld
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 yum install -y git  byobu bind-utils unzip net-tools sysstat openssh-clients perl-core libaio nmap-ncat libstdc++.so.6 nano wget
-reboot
 ```
 
 * Tải Zimbra v8.8.15 [tại đây](https://zimbra.org/download/zimbra-collaboration)
@@ -255,6 +249,7 @@ Các dịch vụ của Zimbra đã hoạt động.
 https: // <mail.domain.com.vn>:7071 / hoặc https: // <ip-address>:7071
 ```
 firewall-cmd --zone=public --add-port=7071/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --reload
 
 <!-- ![](../image/Screenshot_25.png)
