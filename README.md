@@ -1,3 +1,1 @@
-# Document 
-
-[Reset password root ESXi](Tutorial/Reset-password-ESXi.md)
+# Tài liệu nghiên cứu triển khai - EASTERN SUN - ONEDATA
