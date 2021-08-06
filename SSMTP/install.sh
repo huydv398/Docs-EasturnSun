@@ -9,14 +9,19 @@ echo $OS
 
 if [ "$OS" == "CentOS" ]
 then
-    echo centos
+    echo $OS
+    yum install epel-release
+    yum update -y
+    yum install -y ssmtp
+
 elif [ "$OS" == "Ubuntu" ]
 then
-    echo U18
+    echo $OS
+    apt-get update
+    apt install ssmtp -y
 else
     echo none
 fi
-
 cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.bak
 
 read -p "SMTP server:(Enter for: smtp.gmail.com): " smtpserver
