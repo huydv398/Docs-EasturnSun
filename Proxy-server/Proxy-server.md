@@ -1,4 +1,4 @@
-Proxyserver
+# Proxyserver
 Máy chủ proxy hoạt động như một cổng kết nối giữa người dùng và internet.
 
 Máy chủ proxy là bất kỳ máy chủ nào có lưu lượng qua lại giũa các mạng và giao thức. Đó là một máy chủ chung gian tách khách hàng người dùng cuối khỏi các điểm đến mà họ duyệt qua. Máy chủ proxy cung cấp các mức chức năng, bảo mật và quyền riêng tư khác nhau tùy thuộc vào trường hợp sử dụng, như cầu của bạn hoặc chính sách của công ty.
