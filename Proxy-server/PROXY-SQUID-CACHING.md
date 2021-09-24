@@ -41,6 +41,7 @@ systemctl enable --now squid
 Xác minh
 ```
 curl -O -L "https://www.redhat.com/index.html" -x "192.168.10.128:3128"
+
 ```
 Nếu `curl` không hiển thị bất kỳ lỗi nào và tệp `index.html` đã được tải xuống thư mục hiện tại, thì proxy sẽ hoạt động.
 ## Định cấu hình danh sách từ chối miền trong Squid
@@ -50,16 +51,46 @@ Thông thường quản trị viên muốn chặn quyền truy cập vào miền
 acl domain_deny_list dstdomain "/etc/squid/domain_deny_list.txt"
 http_access deny all domain_deny_list
 ```
+Thêm các mục này trước câu lệnh `http_access allow` đầu tiên cho phép truy cập vào người dùng hoặc ứng dụng khách.
 2. Tạo tệp `/etc/squid/domain_deny_list.txt` và thêm các miền bạn muốn chặn. Ví dụ: để chặn quyền truy cập vào **example.com** bao gồm các tên miền phụ và để chặn **example.net**, hãy thêm:
 ```
 .example.com
 example.net
 ```
 Nếu bạn đã tham chiếu đến tệp `/etc/squid/domain_deny_list.txt` trong cấu hình Squid, thì tệp này không được để trống. Nếu tệp trống, Squid không khởi động được.
-1. 
-1. 
-1. 
-1. 
+## Định cấu hình dịch vụ Squid để lắng nghe trên một cổng hoặc địa chỉ IP cụ thể
+Theo mặc định, dịch vụ proxy Squid lắng nghe trên cổng 3128 trên tất cả các interfaces. Phần này mô tả các thay đổi cổng và cấu hình Squid để lắng nghe trên một địa chỉ IP cụ thể
+1. Edit the /etc/squid/squid.conf file:
+* Để đặt cổng mà dịch vụ Squid lắng nghe, hãy đặt số cổng trong tham số http_port. Ví dụ: để đặt cổng thành 8080, hãy đặt:
+```
+http_port 8080
+```
+* Để cấu hình địa chỉ IP nào mà dịch vụ Squid lắng nghe, hãy đặt địa chỉ IP và số cổng trong tham số http_port. Ví dụ: để cấu hình Squid chỉ lắng nghe trên địa chỉ IP 192.168.10.1 trên cổng 3128, hãy đặt:
+```
+http_port 192.168.10.1:3128
+```
+Thêm nhiều tham số http_port vào tệp cấu hình để định cấu hình Squid lắng nghe trên nhiều cổng và địa chỉ IP:
+```
+http_port <IP>:3128
+http_port <IP>:8080
+```
+2. Nếu bạn đã định cấu hình Squid sử dụng một cổng khác làm mặc định (3128):
+* Open the port in the firewall:
+```
+firewall-cmd --permanent --add-port=port_number/tcp
+firewall-cmd --reload
+```
+* Nếu bạn chạy SELinux ở chế độ enforcing , hãy gán cổng cho định nghĩa loại cổng `squid_port_t`:
+```
+semanage port -a -t squid_port_t -p tcp port_number
+```
+Nếu tiện ích `semanage` không có sẵn trên hệ thống của bạn, hãy cài đặt gói `Policycoreutils-python-utils`.
+* Restart the squid service:
+```
+systemctl restart squid
+```
+## Tài nguyên bổ sung
+Xem tệp `usr/share/doc/squid-<version>/squid.conf.documented` để biết danh sách tất cả các thông số cấu hình mà bạn có thể đặt trong tệp `/etc/squid/squid.conf` cùng với mô tả chi tiết.
 1. 
 1. 
 1. 
